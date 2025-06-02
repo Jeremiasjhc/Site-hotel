@@ -21,6 +21,10 @@ body {
     overflow-x: hidden;
 }
 
+body.menu-open {
+    overflow: hidden;
+}
+
 /* Typography */
 h1, h2, h3 {
     font-family: 'Playfair Display', serif;
@@ -109,6 +113,7 @@ h3 { font-size: clamp(1.5rem, 3vw, 2rem); }
     display: none;
     flex-direction: column;
     cursor: pointer;
+    z-index: 1100;
 }
 
 .hamburger span {
@@ -117,6 +122,18 @@ h3 { font-size: clamp(1.5rem, 3vw, 2rem); }
     background: var(--text-primary);
     margin: 3px 0;
     transition: var(--transition);
+}
+
+.hamburger.active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
 }
 
 /* Buttons */
@@ -483,18 +500,34 @@ h3 { font-size: clamp(1.5rem, 3vw, 2rem); }
     .nav-menu {
         position: fixed;
         top: 0;
-        right: -100%;
-        width: 100%;
+        left: 100%;
+        width: 80%;
+        max-width: 300px;
         height: 100vh;
         background: rgba(10, 10, 10, 0.95);
         flex-direction: column;
         justify-content: center;
         align-items: center;
         transition: var(--transition);
+        z-index: 1000;
     }
 
     .nav-menu.active {
-        right: 0;
+        left: calc(100% - 80%);
+    }
+
+    .nav-menu li {
+        margin: 1rem 0;
+    }
+
+    .nav-menu a {
+        font-size: 1.5rem;
+        padding: 0.5rem 1rem;
+    }
+
+    .nav-menu a:focus {
+        outline: 2px solid var(--accent-primary);
+        outline-offset: 2px;
     }
 
     .hamburger {
@@ -527,5 +560,14 @@ h3 { font-size: clamp(1.5rem, 3vw, 2rem); }
 
     .navbar {
         padding: 1rem;
+    }
+
+    .nav-menu {
+        width: 100%;
+        max-width: none;
+    }
+
+    .nav-menu.active {
+        left: 0;
     }
 }
